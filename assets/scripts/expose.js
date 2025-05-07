@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', init);
 
 function init() {
   // TODO
-
+  const jsConfetti = new JSConfetti();
   // update horn image when horn is selected
   const hornSelector = document.querySelector("select");
 
@@ -12,6 +12,8 @@ function init() {
     we specify the event parameter instead of using the event prop for portability:
     https://stackoverflow.com/questions/58341832/event-is-deprecated-what-should-be-used-instead 
   */
+
+  let isPartyHorn = false; 
   hornSelector.addEventListener("input", function(event) {
     function genPath (fileType){
       let assetType = ""
@@ -35,6 +37,9 @@ function init() {
     //change horn sound 
     const hornSound = document.getElementsByClassName("hidden")[0]
     hornSound.src = genPath("mp3")
+    if (hornName = "party-horn"){
+      isPartyHorn = true; 
+    }
   
   }); 
 
@@ -75,13 +80,16 @@ function init() {
     volumeImage.setAttribute("src", audioIconFilePath);
   }); 
 
-  //play horn when button is clicked 
+  //play horn when button is clicked, shoot confetti if it's a party horn 
   playButton.addEventListener("click", function(event){
 
     /*this function is adapted from https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play */
     async function tootHorn(){ 
       try {
         await audioFile.play(); 
+        if (isPartyHorn){
+          jsConfetti.addConfetti(); 
+        }
       }
       catch (err){
         //doing nothing :D 
