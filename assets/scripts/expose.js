@@ -6,9 +6,7 @@ function init() {
   // TODO
 
   // update horn image when horn is selected
-  const hornSelector = document.querySelector("select"); 
-  const volumeInputSelector = document.querySelector("input");
-  console.log(hornSelector); 
+  const hornSelector = document.querySelector("select");
 
   /*
     we specify the event parameter instead of using the event prop for portability:
@@ -43,8 +41,23 @@ function init() {
   //play horn at specified volume when button is clicked 
 
   const playButton = document.querySelector("button"); 
-  const audioFile = document.querySelector("audio.hidden"); 
-  console.log(audioFile); 
+  const audioFile = document.querySelector("audio.hidden");
+  const volumeInputSelector = document.getElementById("volume"); 
+  let vol = 50; 
+  console.log(volumeInputSelector); 
+  console.log(audioFile);
+  console.log(volumeInputSelector.value)
+
+  volumeInputSelector.addEventListener("input", function (event){
+    vol = event.target.value; 
+    console.log(vol)
+    let decimalVol = vol / 100; 
+    audioFile.setAttribute("volume", decimalVol); 
+    console.log(audioFile); 
+    console.log (audioFile.volume);
+
+  }); 
+
   playButton.addEventListener("click", function(event){
 
     /*this function is adapted from https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play */
