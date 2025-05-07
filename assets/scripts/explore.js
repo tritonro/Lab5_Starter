@@ -30,6 +30,34 @@ function init() {
 
 speechSynthesis.addEventListener("voiceschanged", function (event){
   populateVoiceList(); 
+});
+
+ //speak text that is typed into "Text to speak here" input box
+ const textToSpeakBox = document.getElementById("text-to-speak")
+ let speech = ""; 
+
+ textToSpeakBox.addEventListener("selectionchange", function (event) {
+ speech = event.target.value; 
+ curUtterance.text = speech; 
+ })
+//make sure voice is updated with every new selection 
+let curUtterance = new SpeechSynthesisUtterance(); 
+const pressToTalkBtn = document.querySelector("button"); 
+const smilingFriend = document.querySelector("img")
+const smilingFriendPath = "assets/images/smiling.png"
+const speakingFriendPath = "assets/images/smiling-open.png"
+
+pressToTalkBtn.addEventListener("click", function(){
+  
+  speechSynthesis.speak(curUtterance); 
+})
+
+curUtterance.addEventListener("start", function(){
+  smilingFriend.src = speakingFriendPath; 
+})
+
+curUtterance.addEventListener("end", function() {
+  smilingFriend.src = smilingFriendPath; 
 })
   
 }
