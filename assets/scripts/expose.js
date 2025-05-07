@@ -37,9 +37,10 @@ function init() {
     //change horn sound 
     const hornSound = document.getElementsByClassName("hidden")[0]
     hornSound.src = genPath("mp3")
-    if (hornName = "party-horn"){
+    if (hornName == "party-horn"){
       isPartyHorn = true; 
     }
+    else{isPartyHorn=false;}
   
   }); 
 
