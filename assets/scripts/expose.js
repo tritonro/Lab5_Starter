@@ -38,15 +38,16 @@ function init() {
   
   }); 
 
-  //play horn at specified volume when button is clicked 
+  /* adjust volume 
+  update speaker image that displays when volume is adjusted */
 
   const playButton = document.querySelector("button"); 
   const audioFile = document.querySelector("audio.hidden");
   const volumeInputSelector = document.getElementById("volume"); 
+  const volumeImage = document.querySelectorAll("img")[1]; 
+
+  console.log(volumeImage); 
   let vol = 50; 
-  console.log(volumeInputSelector); 
-  console.log(audioFile);
-  console.log(volumeInputSelector.value)
 
   volumeInputSelector.addEventListener("input", function (event){
     vol = event.target.value; 
@@ -55,9 +56,26 @@ function init() {
     audioFile.setAttribute("volume", decimalVol); 
     console.log(audioFile); 
     console.log (audioFile.volume);
+    let volumeLevelString = ""
 
+    if(vol == 0){
+      volumeLevelString = "0"; 
+    } 
+    else if (vol < 33){
+      volumeLevelString = "1"; 
+    }
+    else if (vol < 67){
+      volumeLevelString = "2";
+    }
+    else{
+      volumeLevelString = "3";
+    }
+
+    let audioIconFilePath = `assets/icons/volume-level-${volumeLevelString}.svg`
+    volumeImage.setAttribute("src", audioIconFilePath);
   }); 
 
+  //play horn when button is clicked 
   playButton.addEventListener("click", function(event){
 
     /*this function is adapted from https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play */
@@ -73,5 +91,7 @@ function init() {
     tootHorn(); 
 
   }
+
+  
 );
 }
