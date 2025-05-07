@@ -53,7 +53,7 @@ function init() {
     vol = event.target.value; 
     console.log(vol)
     let decimalVol = vol / 100; 
-    audioFile.setAttribute("volume", decimalVol); 
+    audioFile.volume = decimalVol; 
     console.log(audioFile); 
     console.log (audioFile.volume);
     let volumeLevelString = ""
